@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func ReturnIndexHandler(w http.ResponseWriter, r *http.Request) {
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	file, err := os.Open("index.html")
 	if err != nil {
 		http.Error(w, "couldn't open the file", http.StatusInternalServerError)
@@ -21,13 +21,13 @@ func ReturnIndexHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	io.Copy(w, file)
 }
-func UploadHandler(w http.ResponseWriter, r *http.Request) {
+func UploaderHandler(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseMultipartForm(10 << 20)
 	if err != nil {
 		http.Error(w, "couldn't parse the form", http.StatusInternalServerError)
 		return
 	}
-	file, header, err := r.FormFile("File")
+	file, header, err := r.FormFile("myFile")
 	if err != nil {
 		http.Error(w, "couldn't read the file", http.StatusInternalServerError)
 		return

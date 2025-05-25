@@ -9,23 +9,23 @@ import (
 
 type Server struct {
 	Logger *log.Logger
-	Http   *http.Server
+	HTTP   *http.Server
 }
 
-func NewServer(loger *log.Logger) *Server {
+func NewServer(logger *log.Logger) *Server {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", handlers.ReturnIndexHandler)
-	mux.HandleFunc("/upload", handlers.UploadHandler)
+	mux.HandleFunc("/", handlers.IndexHandler)
+	mux.HandleFunc("/upload", handlers.UploaderHandler)
 	httpServer := &http.Server{
 		Addr:         ":8080",
 		Handler:      mux,
-		ErrorLog:     loger,
+		ErrorLog:     logger,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  15 * time.Second,
 	}
 	return &Server{
-		Logger: loger,
-		Http:   httpServer,
+		Logger: logger,
+		HTTP:   httpServer,
 	}
 }

@@ -11,7 +11,7 @@ var ErrEmptyOrInvalid = errors.New("empty or invalid value")
 func Converter(data string) (string, error) {
 	textOrMorse := func(data string) (string, error) {
 		split := strings.Split(data, ".")
-		if len(split) == 0 || len(split) == 1 && split[0] == "." {
+		if len(split) == 0 || len(split) == 1 && split[0] == "" {
 			return "", ErrEmptyOrInvalid
 		}
 		for _, s := range split {

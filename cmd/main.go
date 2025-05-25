@@ -10,7 +10,7 @@ func main() {
 	logger := log.New(os.Stdout, "SERVER STATUS", log.LstdFlags)
 	srv := server.NewServer(logger)
 	logger.Println("starting server 8080")
-	if err := srv.Http.ListenAndServe(); err != nil {
+	if err := srv.HTTP.ListenAndServe(); err != nil {
 		logger.Fatal("server failed to start: ", err)
 	}
 }
